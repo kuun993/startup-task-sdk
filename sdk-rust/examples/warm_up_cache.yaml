@@ -1,0 +1,11 @@
+# executor: custom -- the handler is registered by the caller; the SDK does not care about its internals
+task_id: cache/warm-up
+version: "2026-10-22-v1"
+description: Warm up hot data in the cache
+timeout_seconds: 60
+execution:
+  executor: custom
+  handler: warm_up_cache
+  config:
+    keys: ["home:feed", "home:recommend", "config:feature-flags"]
+    ttl_seconds: 300

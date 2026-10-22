@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/kuun993/startup-task-sdk/main/spec/schema.json",
+  "title": "Startup Task Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["task_id", "version", "execution"],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9._:/-]+$",
+      "description": "Globally unique identifier of the task"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Execution batch; a new version for the same task_id means a new run"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human readable description of the task"
+    },
+    "timeout_seconds": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "default": 300,
+      "description": "Execution timeout, also used for stale-lock detection: expires_at = acquired_at + timeout_seconds"
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executor"],
+      "properties": {
+        "executor": {
+          "type": "string",
+          "enum": ["http", "custom"]
+        },
+        "handler": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required when executor is custom; name of the handler registered by the caller"
+        },
+        "config": {
+          "type": "object",
+          "description": "Executor parameters; fixed structure for executor=http, passed through verbatim for executor=custom"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "executor": { "const": "custom" } },
+            "required": ["executor"]
+          },
+          "then": {
+            "required": ["handler"]
+          }
+        },
+        {
+          "if": {
+            "properties": { "executor": { "const": "http" } },
+            "required": ["executor"]
+          },
+          "then": {
+            "required": ["config"],
+            "properties": {
+              "config": { "$ref": "#/$defs/httpConfig" }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "httpConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "url"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "minLength": 1,
+          "description": "HTTP method, e.g. GET / POST / PUT / PATCH / DELETE"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Target URL; supports ${ENV} expansion"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Request headers; values support ${ENV} expansion"
+        },
+        "body_source": {
+          "type": "string",
+          "enum": ["file", "inline", "none"],
+          "default": "none"
+        },
+        "body_path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required when body_source is file"
+        },
+        "body": {
+          "type": "string",
+          "description": "Request body when body_source is inline; supports ${ENV} expansion"
+        },
+        "success_check": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "http_status": {
+              "oneOf": [
+                { "type": "integer" },
+                { "type": "array", "items": { "type": "integer" }, "minItems": 1 }
+              ],
+              "default": 200
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "body_source": { "const": "file" } },
+            "required": ["body_source"]
+          },
+          "then": { "required": ["body_path"] }
+        }
+      ]
+    }
+  }
+}

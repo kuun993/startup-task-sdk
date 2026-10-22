@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "startup-task-sdk"
+version = "0.1.0"
+description = "Cross-language startup task coordination SDK - Python implementation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "PyYAML>=6.0",
+    "psycopg2-binary>=2.9",
+    "requests>=2.28",
+]
+
+[project.urls]
+Repository = "https://github.com/kuun993/startup-task-sdk"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "PyMySQL>=1.1",
+]
+mysql = [
+    "PyMySQL>=1.1",
+]
+
+[tool.setuptools]
+packages = ["startup_task"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

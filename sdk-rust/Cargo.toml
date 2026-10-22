@@ -1,0 +1,36 @@
+[package]
+name = "startup-task-sdk"
+version = "0.1.0"
+edition = "2021"
+description = "Cross-language startup task coordination SDK (Rust implementation)"
+license = "MIT"
+repository = "https://github.com/kuun993/startup-task-sdk"
+
+[lib]
+name = "startup_task_sdk"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1"
+sqlx = { version = "0.9", default-features = false, features = [
+    "runtime-tokio",
+    "postgres",
+    "mysql",
+    "sqlite",
+    "chrono",
+] }
+futures-util = { version = "0.3", default-features = false, features = ["std"] }
+reqwest = { version = "0.12", default-features = false, features = [
+    "rustls-tls",
+    "json",
+] }
+tokio = { version = "1", features = ["full"] }
+chrono = { version = "0.4", features = ["serde"] }
+async-trait = "0.1"
+tracing = "0.1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tempfile = "3"

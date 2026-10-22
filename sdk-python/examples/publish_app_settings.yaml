@@ -1,0 +1,17 @@
+# executor: http -- publish a default settings bundle to the config center (idempotent PUT)
+task_id: config/publish-app-settings
+version: "2026-10-22-v1"
+description: Publish application default settings to the config center
+timeout_seconds: 120
+execution:
+  executor: http
+  config:
+    method: PUT
+    url: "${CONFIG_CENTER_URL}/api/v1/apps/${APP_NAME}/settings"
+    headers:
+      Authorization: "Bearer ${CONFIG_CENTER_TOKEN}"
+      Content-Type: "application/json"
+    body_source: file
+    body_path: "app_settings.json"
+    success_check:
+      http_status: [200, 201]
