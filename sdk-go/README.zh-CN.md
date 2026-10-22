@@ -8,7 +8,7 @@ English: [README.md](README.md)
 `EXECUTED`，其余实例要么 `SKIPPED_ALREADY_DONE`，要么 `SKIPPED_LOCKED`。
 
 ```go
-import startuptask "github.com/kuun993/startup-task-sdk/go"
+import startuptask "github.com/kuun993/startup-task-sdk/sdk-go"
 ```
 
 ## 1. 初始化

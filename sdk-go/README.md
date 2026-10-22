@@ -10,7 +10,7 @@ time, the same `(task_id, version)` produces exactly one `EXECUTED`, and every
 other instance ends up either `SKIPPED_ALREADY_DONE` or `SKIPPED_LOCKED`.
 
 ```go
-import startuptask "github.com/kuun993/startup-task-sdk/go"
+import startuptask "github.com/kuun993/startup-task-sdk/sdk-go"
 ```
 
 ## 1. Initialization

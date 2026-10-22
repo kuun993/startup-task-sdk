@@ -19,7 +19,7 @@ import (
 	"runtime"
 	"time"
 
-	startuptask "github.com/kuun993/startup-task-sdk/go"
+	startuptask "github.com/kuun993/startup-task-sdk/sdk-go"
 
 	_ "modernc.org/sqlite"
 )

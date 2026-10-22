@@ -1,4 +1,4 @@
-module github.com/kuun993/startup-task-sdk/go
+module github.com/kuun993/startup-task-sdk/sdk-go
 
 go 1.24.0
 
