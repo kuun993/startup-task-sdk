@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,24 +8,36 @@ version = "0.1.0"
 description = "Cross-language startup task coordination SDK - Python implementation"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "kuun993", email = "kuun993@163.com" }]
+keywords = ["kubernetes", "startup", "coordination", "distributed-lock", "initialization"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+]
 dependencies = [
     "PyYAML>=6.0",
-    "psycopg2-binary>=2.9",
     "requests>=2.28",
 ]
 
 [project.urls]
+Homepage = "https://github.com/kuun993/startup-task-sdk"
 Repository = "https://github.com/kuun993/startup-task-sdk"
+Issues = "https://github.com/kuun993/startup-task-sdk/issues"
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=7.4",
-    "PyMySQL>=1.1",
-]
-mysql = [
-    "PyMySQL>=1.1",
-]
+postgres = ["psycopg2-binary>=2.9"]
+mysql = ["PyMySQL>=1.1"]
+all = ["psycopg2-binary>=2.9", "PyMySQL>=1.1"]
+dev = ["pytest>=7.4", "psycopg2-binary>=2.9", "PyMySQL>=1.1"]
 
 [tool.setuptools]
 packages = ["startup_task"]

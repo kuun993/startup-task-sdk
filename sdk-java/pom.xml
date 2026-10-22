@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.startuptask</groupId>
+  <groupId>io.github.kuun993</groupId>
   <artifactId>startup-task-sdk</artifactId>
   <version>0.1.0</version>
   <packaging>jar</packaging>
@@ -12,6 +12,30 @@
   <name>startup-task-sdk</name>
   <url>https://github.com/kuun993/startup-task-sdk</url>
   <description>Cross-language startup task coordination SDK (Java)</description>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://github.com/kuun993/startup-task-sdk/blob/main/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>kuun993</id>
+      <name>kuun993</name>
+      <email>kuun993@163.com</email>
+      <url>https://github.com/kuun993</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/kuun993/startup-task-sdk.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/kuun993/startup-task-sdk.git</developerConnection>
+    <url>https://github.com/kuun993/startup-task-sdk</url>
+    <tag>v0.1.0</tag>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -72,6 +96,73 @@
         <artifactId>maven-dependency-plugin</artifactId>
         <version>3.8.1</version>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals><goal>jar-no-fork</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.11.2</version>
+        <configuration>
+          <doclint>none</doclint>
+          <failOnError>false</failOnError>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals><goal>jar</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>central</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>3.2.7</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals><goal>sign</goal></goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>central</id>
+          <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+          <id>central</id>
+          <url>https://central.sonatype.com/repository/maven-releases/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>github-packages</id>
+      <distributionManagement>
+        <repository>
+          <id>github</id>
+          <url>https://maven.pkg.github.com/kuun993/startup-task-sdk</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+  </profiles>
 </project>

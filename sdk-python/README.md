@@ -22,10 +22,10 @@ python -m venv .venv
 # ./.venv/bin/python -m pip install -e .                # Linux / macOS
 ```
 
-Runtime dependencies: `PyYAML`, `psycopg2-binary`, `requests`; the tests
-additionally need `pytest` (`pip install -e . pytest` or
-`pip install -r requirements-dev.txt`). The MySQL dialect additionally needs
-`PyMySQL` (`pip install -e ".[mysql]"`).
+Runtime dependencies: `PyYAML` and `requests`. Database drivers are optional:
+`pip install "startup-task-sdk[postgres]"` (psycopg2-binary),
+`[mysql]` (PyMySQL) or `[all]`. Tests need `pytest`
+(`pip install -e ".[dev]"` or `pip install -r requirements-dev.txt`).
 
 Requires Python >= 3.10.
 

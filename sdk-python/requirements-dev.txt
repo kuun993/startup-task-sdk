@@ -1,3 +1,4 @@
 -r requirements.txt
 pytest>=7.4
+psycopg2-binary>=2.9
 PyMySQL>=1.1

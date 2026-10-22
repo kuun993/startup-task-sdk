@@ -27,7 +27,7 @@ startup-task-sdk/
 │   └── ddl/{postgres,mysql,sqlite}.sql
 ├── sdk-python/                ← pip 包 startup_task
 ├── sdk-go/                    ← package startuptask
-├── sdk-java/                  ← Maven 项目 io.startuptask:startup-task-sdk
+├── sdk-java/                  ← Maven 项目 io.github.kuun993:startup-task-sdk
 └── sdk-rust/                  ← crate startup-task-sdk
 ```
 

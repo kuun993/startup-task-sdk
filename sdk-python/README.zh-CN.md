@@ -19,9 +19,10 @@ python -m venv .venv
 # ./.venv/bin/python -m pip install -e .                # Linux / macOS
 ```
 
-运行依赖：`PyYAML`、`psycopg2-binary`、`requests`；测试额外需要 `pytest`
-（`pip install -e . pytest` 或 `pip install -r requirements-dev.txt`）。
-MySQL 方言额外需要 `PyMySQL`（`pip install -e ".[mysql]"`）。
+运行依赖：`PyYAML`、`requests`。数据库驱动是可选 extras：
+`pip install "startup-task-sdk[postgres]"`（psycopg2-binary）、
+`[mysql]`（PyMySQL）或 `[all]`。测试需要 `pytest`
+（`pip install -e ".[dev]"` 或 `pip install -r requirements-dev.txt`）。
 
 要求 Python >= 3.10。
 
