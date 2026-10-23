@@ -28,6 +28,7 @@ startup-task-sdk/
 ├── sdk-python/                ← pip 包 startup_task
 ├── sdk-go/                    ← package startuptask
 ├── sdk-java/                  ← Maven 项目 io.github.kuun993:startup-task-sdk
+├── sdk-java-spring-boot3-starter/ ← Spring Boot 3 starter（Java 21）
 └── sdk-rust/                  ← crate startup-task-sdk
 ```
 

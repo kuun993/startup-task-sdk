@@ -1,0 +1,9 @@
+task_id: test/warm-up
+version: "v1"
+description: Warm up the test cache
+timeout_seconds: 30
+execution:
+  executor: custom
+  handler: test_handler
+  config:
+    token: "${test.token}"

@@ -1,0 +1,7 @@
+task_id: test/failing
+version: "v1"
+description: Always fails
+timeout_seconds: 30
+execution:
+  executor: custom
+  handler: failing_handler
